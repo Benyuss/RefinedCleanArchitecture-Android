@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidTargetSdkVersion"]
+
+    defaultConfig {
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+
+        applicationId globalConfiguration["androidApplicationId"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
+        testInstrumentationRunner globalConfiguration["testInstrumentationRunner"]
+        testApplicationId globalConfiguration["testApplicationId"]
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
+dependencies {
+    def baseDependencies = rootProject.ext.baseDependencies
+    def baseTestDependencies = rootProject.ext.baseTestDependencies
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+    def developmentDependencies = rootProject.ext.developmentDependencies
+
+    implementation project(':api')
+    implementation project(':domain')
+    implementation project(':data')
+
+    implementation baseDependencies.kotlin
+    implementation baseDependencies.kotlinReflect
+
+    implementation baseDependencies.rxJava
+    implementation baseDependencies.javaxInject
+    compileOnly baseDependencies.javaxAnnotation
+
+    implementation baseDependencies.jsr310Backport
+
+    testImplementation baseTestDependencies.junit
+    testImplementation baseTestDependencies.assertj
+
+    implementation presentationDependencies.dagger
+    kapt presentationDependencies.daggerCompiler
+
+    implementation presentationDependencies.butterKnife
+    kapt presentationDependencies.butterKnifeCompiler
+
+    implementation presentationDependencies.rxAndroid
+
+    implementation presentationDependencies.design
+    implementation presentationDependencies.appCompat
+    implementation presentationDependencies.recyclerView
+    implementation presentationDependencies.cardView
+    implementation presentationDependencies.constraintLayout
+
+    implementation presentationDependencies.glide
+
+    implementation presentationDependencies.jsr310Backport
+
+    implementation presentationDependencies.navigation
+
+    implementation presentationDependencies.androidLifeCycleExtension
+
+    androidTestImplementation presentationTestDependencies.mockito
+    androidTestImplementation presentationTestDependencies.espresso
+
+    implementation developmentDependencies.leakCanary
+}

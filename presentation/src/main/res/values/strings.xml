@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">AndroidArch</string>
+
+    <string name="error_no_users">Failed to load any users</string>
+    <string name="search">Search</string>
+    <string name="user_image">User image</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="error_no_users">Nem sikerült betölteni a felhasználókat.</string>
+    <string name="search">Keresés</string>
+    <string name="user_image">Felhasználó képe</string>
+
+</resources>

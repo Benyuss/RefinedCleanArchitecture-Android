@@ -1,0 +1,28 @@
+apply plugin: 'kotlin'
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+dependencies {
+    def baseDependencies = rootProject.ext.baseDependencies
+    def baseTestDependencies = rootProject.ext.baseTestDependencies
+    def domainDependencies = rootProject.ext.domainDependencies
+    def domainTestDependencies = rootProject.ext.domainTestDependencies
+
+    implementation project(':api')
+
+    implementation baseDependencies.kotlin
+    implementation baseDependencies.kotlinReflect
+
+    implementation baseDependencies.rxJava
+    implementation baseDependencies.javaxInject
+    compileOnly baseDependencies.javaxAnnotation
+
+    implementation baseDependencies.jsr310Backport
+
+    testImplementation baseTestDependencies.junit
+    testImplementation baseTestDependencies.assertj
+}
+
+repositories {
+    mavenCentral()
+}

@@ -1,0 +1,101 @@
+apply from: 'buildsystem/versionNumbers.gradle'
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        jcenter()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+}
+
+ext {
+    //Base dependency pack
+    baseDependencies = [
+            kotlin         : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            kotlinReflect  : "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version",
+
+            rxJava         : "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            javaxAnnotation: "javax.annotation:jsr250-api:$javaxAnnotationVersion",
+            javaxInject    : "javax.inject:javax.inject:$javaxInjectVersion",
+
+            jsr310Backport : "com.jakewharton.threetenabp:threetenabp:$jsr310BackportVersion"
+    ]
+
+    //Base test dependency pack
+    baseTestDependencies = [
+            junit  : "junit:junit:$jUnitVersion",
+            assertj: "org.assertj:assertj-core:$assertJVersion"
+    ]
+
+    //Layer specific dependency packs
+
+    //Dependencies of domain layer
+    domainDependencies = [
+    ]
+
+    domainTestDependencies = [
+    ]
+
+    //Dependencies of network layer
+    networkDependencies = [
+            rxAndroid             : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+
+            moshi                 : "com.squareup.moshi:moshi:$moshiVersion",
+            moshiKotlinSupport    : "com.squareup.moshi:moshi-kotlin:$moshiVersion",
+
+            retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitMoshiConverter: "com.squareup.retrofit2:converter-moshi:$retrofitVersion:",
+            loggingInterceptor    : "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
+            rxJavaRetrofitAdapter : "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    ]
+
+    networkTestDependencies = [
+            espresso   : "androidx.test.espresso:espresso-core:$espressoVersion",
+            robolectric: "org.robolectric:robolectric:$robolectricVersion",
+            mockito    : "org.mockito:mockito-core:$mockitoVersion"
+    ]
+
+    //Dependencies of data layer
+    dataDependencies = [
+    ]
+
+    dataTestDependencies = [
+            mockito: "org.mockito:mockito-core:$mockitoVersion"
+    ]
+
+    presentationDependencies = [
+            dagger                   : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler           : "com.google.dagger:dagger-compiler:$daggerVersion",
+
+            butterKnife              : "com.jakewharton:butterknife:$butterKnifeVersion",
+            butterKnifeCompiler      : "com.jakewharton:butterknife-compiler:$butterKnifeVersion",
+
+            rxAndroid                : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+
+            design                   : "com.google.android.material:material:$androidXVersion",
+            appCompat                : "androidx.appcompat:appcompat:$androidXVersion",
+            recyclerView             : "androidx.recyclerview:recyclerview:$androidXVersion",
+            cardView                 : "androidx.cardview:cardview:$androidXVersion",
+            constraintLayout         : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+
+            glide                    : "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler            : "jp.wasabeef:glide-transformations:${glideTransformationsVersion}",
+
+            jsr310Backport           : "com.jakewharton.threetenabp:threetenabp:$jsr310BackportVersion",
+
+            navigation               : "android.arch.navigation:navigation-fragment:$navigationVersion",
+
+            androidLifeCycleExtension: "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
+    ]
+
+    presentationTestDependencies = [
+            espresso: "androidx.test.espresso:espresso-core:$espressoVersion",
+            mockito : "org.mockito:mockito-core:$mockitoVersion"
+    ]
+
+    developmentDependencies = [
+            leakCanary: "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    ]
+}
